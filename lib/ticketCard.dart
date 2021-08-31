@@ -1,10 +1,55 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_web/image_picker_web.dart';
+import 'package:login_signup_screen/cardDisplay.dart';
+import 'package:login_signup_screen/signup.dart';
 
-import 'package:login_signup_screen/login.dart';
-import 'package:login_signup_screen/ticketCard.dart';
+TextEditingController _firstname = TextEditingController();
+TextEditingController _surname = TextEditingController();
+TextEditingController _companyname = TextEditingController();
+TextEditingController _branchname = TextEditingController();
+TextEditingController _address = TextEditingController();
+TextEditingController _city = TextEditingController();
+TextEditingController _region = TextEditingController();
+// TextEditingController _branchname = TextEditingController();
+TextEditingController _ticketnumber = TextEditingController();
+TextEditingController _agentlevel = TextEditingController();
+TextEditingController _problemdesc = TextEditingController();
+TextEditingController _assignmentstatus = TextEditingController();
 
-class SignupPage extends StatelessWidget {
+String firstname;
+String surname;
+String companyname;
+String branchname;
+String address;
+String city;
+String region;
+String ticketnumber;
+String agentlevel;
+String problemdesc;
+String assignmentstatus;
+
+class MainTicketCard extends StatefulWidget {
+  @override
+  TicketCard createState() => TicketCard();
+}
+
+class TicketCard extends State<MainTicketCard> {
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
+  // --------File Picker for Mobile!!!----------
+  Future pickImage() async {
+    await ImagePicker().getImage(source: ImageSource.gallery);
+  }
+
+  // --------File Picker for Web!!!----------
+  // Future pickImage() async {
+  //   await ImagePickerWeb.getImage(outputType: ImageType.widget);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +81,7 @@ class SignupPage extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Text(
-                    "Sign up",
+                    "Fill In The TIcket Below",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -45,27 +90,28 @@ class SignupPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Create an account, It's free ",
-                    style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  //file Picker
                 ],
               ),
               Row(
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _firstname,
                       decoration: InputDecoration(labelText: 'First Name'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => firstname = value,
                     ),
                   ),
                   Padding(padding: const EdgeInsets.all(20)),
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _surname,
                       decoration: InputDecoration(labelText: 'Surname'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => surname = value,
                     ),
                   ),
                 ],
@@ -74,17 +120,17 @@ class SignupPage extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _companyname,
                       decoration: InputDecoration(labelText: 'Company Name'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => companyname = value,
                     ),
                   ),
                   Padding(padding: const EdgeInsets.all(20)),
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _branchname,
                       decoration: InputDecoration(labelText: 'Branch Name'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => branchname = value,
                     ),
                   ),
                 ],
@@ -93,17 +139,17 @@ class SignupPage extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _address,
                       decoration: InputDecoration(labelText: 'Address'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => address = value,
                     ),
                   ),
                   Padding(padding: const EdgeInsets.all(20)),
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _city,
                       decoration: InputDecoration(labelText: 'City'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => city = value,
                     ),
                   ),
                 ],
@@ -112,17 +158,17 @@ class SignupPage extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _region,
                       decoration: InputDecoration(labelText: 'Region'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => region = value,
                     ),
                   ),
                   Padding(padding: const EdgeInsets.all(20)),
                   Expanded(
                     child: TextField(
-                      // controller: _username,
+                      controller: _branchname,
                       decoration: InputDecoration(labelText: 'Branch Name'),
-                      // onChanged: (value) => username = value,
+                      onChanged: (value) => branchname = value,
                     ),
                   ),
                 ],
@@ -131,23 +177,53 @@ class SignupPage extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      // controller: _username,
-                      decoration: InputDecoration(labelText: 'Password'),
-                      obscureText: true,
-                      // onChanged: (value) => username = value,
+                      controller: _ticketnumber,
+                      decoration: InputDecoration(labelText: 'Ticket Number'),
+                      onChanged: (value) => ticketnumber = value,
                     ),
                   ),
                   Padding(padding: const EdgeInsets.all(20)),
                   Expanded(
                     child: TextField(
-                      // controller: _username,
-                      decoration: InputDecoration(labelText: 'Repeat Password'),
-                      obscureText: true,
-                      // onChanged: (value) => username = value,
+                      controller: _agentlevel,
+                      decoration: InputDecoration(labelText: 'Agent Level'),
+                      onChanged: (value) => agentlevel = value,
                     ),
                   ),
                 ],
               ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      controller: _problemdesc,
+                      decoration:
+                          InputDecoration(labelText: 'Problem Description'),
+                      onChanged: (value) => problemdesc = value,
+                    ),
+                  ),
+                  Padding(padding: const EdgeInsets.all(20)),
+                  Expanded(
+                    child: TextField(
+                      controller: _assignmentstatus,
+                      decoration:
+                          InputDecoration(labelText: 'Assignment Status'),
+                      onChanged: (value) => assignmentstatus = value,
+                    ),
+                  ),
+                ],
+              ),
+
+              // select file
+              Column(
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Upload File"),
+                    onPressed: () => pickImage(),
+                  ),
+                ],
+              ),
+
               Container(
                 padding: EdgeInsets.only(top: 3, left: 3),
                 decoration: BoxDecoration(
@@ -165,8 +241,19 @@ class SignupPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            //if user info is true open ticket card
-                            builder: (context) => MainTicketCard()));
+                            builder: (context) => MainCardDisplay(
+                                  firstname: firstname,
+                                  surname: surname,
+                                  companyname: companyname,
+                                  address: address,
+                                  city: city,
+                                  region: region,
+                                  branchname: branchname,
+                                  ticketnumber: ticketnumber,
+                                  agentlevel: agentlevel,
+                                  problemdesc: problemdesc,
+                                  assignmentstatus: assignmentstatus,
+                                )));
                   },
                   color: Colors.teal,
                   elevation: 0,
@@ -174,49 +261,15 @@ class SignupPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Text(
-                    "Sign up",
+                    "Submit",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
-
-                  // child: RichText(
-                  //   text: TextSpan(
-                  //       style: DefaultTextStyle.of(context).style,
-                  //       children: <TextSpan>[TextSpan(text: 'Sign Up')]),
-                  // )
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have an account?"),
-                  // Text(
-                  //   " Login",
-                  //   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                  // )
-                  RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: 'Log In',
-                          style: new TextStyle(
-                            color: Colors.teal,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainLoginPage()));
-                            })
-                    ]),
-                  )
-                ],
-              )
             ],
           ),
         ),

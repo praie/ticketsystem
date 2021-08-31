@@ -26,44 +26,22 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    "GIGABYTE TICKET SYSTEM ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 15,
-                    ),
-                  )
                 ],
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height / 3,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/welcome.png"))),
               ),
               Column(
                 children: <Widget>[
-                  // the login button
                   MaterialButton(
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainLoginPage()));
                     },
-                    // defining the shape
-
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(10)),
@@ -73,7 +51,6 @@ class HomePage extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
-                  // creating the signup button
                   SizedBox(height: 20),
                   MaterialButton(
                     minWidth: double.infinity,
@@ -84,7 +61,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => SignupPage()));
                     },
-                    color: Color(0xff9c1156),
+                    color: Colors.teal,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     child: Text(
